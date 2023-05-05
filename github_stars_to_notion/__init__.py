@@ -6,6 +6,7 @@ import requests
 import yaml
 import json
 from notion.client import NotionClient
+import os
 
 # For testing use star cache to avoid GitHub rate limit
 DEBUG_USE_CACHE = False
@@ -160,14 +161,18 @@ def load_config(config_file_path):
 
     return config
 
+def get_secret(name: str) -> str:
+    return os.environ[name]
+
+
 
 def main():
     if len(sys.argv) != 5:
-        print(f'Usage: {sys.argv[0]} github_username github_token notion_table_url notion_token_v2')
+        print(f'Usage: {sys.argv[0]}')
         sys.exit(1)
 
-    gh_username = sys.argv[1]
-    gh_token = sys.argv[2]
+    gh_username = get_secret("GH_USERNAME") 
+    gh_token = get_secret("GH_TOKEN") 
 
     print('Retrieving stars for GitHub user {}'.format(gh_username))
 
@@ -190,10 +195,8 @@ def main():
             print('Cached stars')
 
     print('Syncing stars to Notion table')
-    n_table = sys.argv[3] 
-    n_token = sys.argv[4]
-    sync_star_table(n_table, n_token, stars)
-
+    n_table = get_secret("notion_table_url")
+    n_token = get_secret("notion_token")
 
 if __name__ == '__main__':
     main()
