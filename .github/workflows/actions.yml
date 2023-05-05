@@ -22,4 +22,10 @@ jobs:
           pip install -r requirements.txt
 
       - name: execute py script # run main.py
+        env:
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GH_USERNAME: ${{secrets.GITHUB_USERNAME}}
+          NOTION_TABLE_URL: ${{secrets.NOTION_TABLE_URL}}
+          NOTION_TOKEN: ${{secrets.NOTION_TOKEN}}
+
         run: python github_stars_to_notion/__init__.py

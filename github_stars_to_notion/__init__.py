@@ -195,8 +195,8 @@ def main():
             print('Cached stars')
 
     print('Syncing stars to Notion table')
-    n_table = get_secret("notion_table_url")
-    n_token = get_secret("notion_token")
+    n_table = get_secret("NOTION_TABLE_URL")
+    n_token = get_secret("NOTION_TOKEN")
     sync_star_table(n_table, n_token, stars)
 
 if __name__ == '__main__':
