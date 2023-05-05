@@ -197,6 +197,7 @@ def main():
     print('Syncing stars to Notion table')
     n_table = get_secret("notion_table_url")
     n_token = get_secret("notion_token")
+    sync_star_table(n_table, n_token, stars)
 
 if __name__ == '__main__':
     main()
