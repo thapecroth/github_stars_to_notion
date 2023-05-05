@@ -162,15 +162,12 @@ def load_config(config_file_path):
 
 
 def main():
-    if len(sys.argv) != 2:
-        print(f'Usage: {sys.argv[0]} config.yml')
+    if len(sys.argv) != 5:
+        print(f'Usage: {sys.argv[0]} github_username github_token notion_table_url notion_token_v2')
         sys.exit(1)
 
-    config_path = sys.argv[1]
-    config = load_config(config_path)
-
-    gh_username = config['github']['username']
-    gh_token = config['github']['token']
+    gh_username = sys.argv[1]
+    gh_token = sys.argv[2]
 
     print('Retrieving stars for GitHub user {}'.format(gh_username))
 
@@ -193,8 +190,8 @@ def main():
             print('Cached stars')
 
     print('Syncing stars to Notion table')
-    n_table = config['notion']['table_url']
-    n_token = config['notion']['token_v2']
+    n_table = sys.argv[3] 
+    n_token = sys.argv[4]
     sync_star_table(n_table, n_token, stars)
 
 
