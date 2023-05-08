@@ -167,10 +167,6 @@ def get_secret(name: str) -> str:
 
 
 def main():
-    if len(sys.argv) != 1:
-        print(f'Usage: {sys.argv[0]}')
-        sys.exit(1)
-
     gh_username = get_secret("GH_USERNAME") 
     gh_token = get_secret("GH_TOKEN") 
 
